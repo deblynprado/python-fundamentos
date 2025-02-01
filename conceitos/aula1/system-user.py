@@ -5,7 +5,7 @@ name = "Deblyn Prado"
 age = 29
 is_active = True
 
-print("\n=====================================")
+print("=====================================")
 print("******* Welcome to the System *******")
 print("Username: ", name)
 print("Age: ", age)
