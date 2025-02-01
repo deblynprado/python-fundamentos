@@ -1,12 +1,19 @@
-print("Passo 1 - Arrumar a Mesa")
-print("Passo 2 - Sair de Casa")
-print("Passo 3 - Ir até a padaria")
-print("Passo 4 - Comprar o Pão")
-print("Passo 5 - Voltar pra casa")
-print("Passo 6 - Esquentar água")
-print("Passo 7 - Colocar pó na cafeteira")
-print("Passo 8 - Fazer o café ")
-print("Passo 9 - Cortar o pão")
-print("Passo 10 - passar manteiga no pão")
-print("Passo 11 - servir o café")
-print("Passo 12 - Tomar o Café da Manhã ")
+steps = [
+    "Arrumar a Mesa",
+    "Sair de Casa",
+    "Ir até a padaria",
+    "Comprar o Pão",
+    "Voltar pra casa",
+    "Esquentar água",
+    "Colocar pó na cafeteira",
+    "Fazer o café",
+    "Cortar o pão",
+    "Passar manteiga no pão",
+    "Servir o café",
+    "Tomar o Café da Manhã"
+]
+
+for i, step in enumerate(steps, start=1):
+    print(f"Step {i} - {step}")
+    
+    
