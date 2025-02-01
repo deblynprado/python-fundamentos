@@ -6,12 +6,13 @@ age = 29
 is_active = True
 
 print("\n=====================================")
-print("***** Welcome to the System *****")
+print("******* Welcome to the System *******")
 print("Username: ", name)
 print("Age: ", age)
 if is_active:
-    print("This user is active in the system")
+  active_status_message = "active"
 else:
-    print("This user is inactive in the system")
+  active_status_message = "inactive"
+print("This user is", active_status_message, "in the system")
 print("=====================================")
 
