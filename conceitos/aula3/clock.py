@@ -1,14 +1,21 @@
-import datetime
+from datetime import datetime
+import time
 
-def getDateTime():
-  current = datetime.datetime.now()
+
+
+def getTime():
+  current = datetime.now()
   return current.strftime("%H:%M:%S")
+
+def getDate():
+  today = datetime.today()
+  return today.strftime("%Y-%m-%d")
 
 def showClock():
   try:
     while True:
-      time = getDateTime()
-      print(f"The current time is: {getDateTime()}", end="\r")
+      print(f"Today is {getDate()} - The current time is: {getTime()}", end="\r")
+      time.sleep(1)
   except KeyboardInterrupt:
     print("Exiting...") 
   
