@@ -10,6 +10,7 @@ print("3 - Multiplicação")
 print("4 - Divisão")
 op = int(input("Operação: "))
 
+
 if op == 1:
   print(num1, "+", num2, "=", num1+num2)  
 elif op == 2:
@@ -17,6 +18,9 @@ elif op == 2:
 elif op == 3:
   print(num1, "*", num2, "=", num1*num2)
 elif op == 4:
-  print(num1, "/", num2, "=", num1/num2)
+  if num2 == 0:
+    print("Não é possível dividir por 0")
+  else:
+    print(num1, "/", num2, "=", num1/num2)
 else:
   print("Operação inválida")
