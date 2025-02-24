@@ -1,8 +1,6 @@
 from datetime import datetime
 import time
 
-
-
 def getTime():
   current = datetime.now()
   return current.strftime("%H:%M:%S")

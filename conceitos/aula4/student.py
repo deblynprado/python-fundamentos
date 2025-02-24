@@ -1,10 +1,17 @@
-class students :
-  name = "John"
-  age = 21
-  course = "Computer Science"
-  
-print(students.name)
+class Students :
+  def __init__(self, name, score) :
+    self.name = name
+    self.score = score
+    
+  def finalResult(self) :
+    if self.score >= 6 :
+      print(f"{self.name} passed the exam")
+    else :
+      print(f"{self.name} failed the exam")
+      
+studentName = input("Enter the student's name: ")
+studentScore = input("Enter the student's score: ")
 
-student1 = students()
-student1.name = "Jane"
-print(student1.name)
+aluno = Students(studentName, float(studentScore))
+aluno.finalResult()
+  
