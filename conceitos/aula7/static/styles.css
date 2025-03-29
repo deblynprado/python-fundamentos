@@ -1,0 +1,33 @@
+ul.cool-list {
+    list-style: none; /* Remove default bullets */
+    padding: 0;
+    margin: 0;
+}
+
+ul.cool-list li {
+    position: relative;
+    padding: 10px 15px;
+    margin: 5px 0;
+    background-color: #f0f0f0; /* Light gray background */
+    border-radius: 8px; /* Rounded corners */
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333; /* Dark text color */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+ul.cool-list li::before {
+    content: "•"; /* Custom bullet */
+    color: #0078d7; /* Blue color for the bullet */
+    font-size: 20px;
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+ul.cool-list li:hover {
+    background-color: #0078d7; /* Blue background on hover */
+    color: #fff; /* White text on hover */
+    transform: scale(1.02); /* Slight zoom effect */
+}

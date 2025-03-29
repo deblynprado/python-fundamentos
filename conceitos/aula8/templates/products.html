@@ -1,0 +1,8 @@
+{% include 'header.html' %}
+  <h1>Products Json</h1>
+  <ul>
+    {% for item in prod %}
+      <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+{% include 'footer.html' %}
