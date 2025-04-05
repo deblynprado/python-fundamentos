@@ -1,0 +1,135 @@
+{% include 'header.html' %}
+<div class="container mt-5">
+  <h1 class="text-center">Task Manager</h1>
+  <div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
+  <div class="mb-4">
+    <input type="text" id="newTask" class="form-control" placeholder="Enter new task">
+    <button id="addTask" class="btn btn-primary mt-2">Add Task</button>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Task Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="taskTable">
+      <!-- Task rows will be dynamically added here -->
+    </tbody>
+  </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  const apiUrl = '/tasks';
+  const authToken = 'Bearer a3f5c8e1d4b6a7c9e2f3b4d5c6a7e8f'; // Define the token
+
+  // Fetch and display tasks
+  function fetchTasks() {
+    fetch(apiUrl, {
+      headers: {
+        'Authorization': authToken
+      }
+    })
+      .then(response => {
+        if (response.status === 401) {
+          showError('Authentication failed. Please check your token.');
+          return [];
+        }
+        return response.json();
+      })
+      .then(data => {
+        const taskTable = document.getElementById('taskTable');
+        taskTable.innerHTML = '';
+        data.forEach(task => {
+          const row = `
+            <tr>
+              <td>${task.id}</td>
+              <td>${task.name}</td>
+              <td>
+                <button class="btn btn-warning btn-sm" onclick="editTask(${task.id}, '${task.name}')">Edit</button>
+                <button class="btn btn-danger btn-sm" onclick="removeTask(${task.id})">Remove</button>
+              </td>
+            </tr>
+          `;
+          taskTable.innerHTML += row;
+        });
+      });
+  }
+
+  // Add a new task
+  document.getElementById('addTask').addEventListener('click', () => {
+    const newTask = document.getElementById('newTask').value;
+    if (newTask) {
+      fetch(`${apiUrl}/${newTask}`, {
+        method: 'POST',
+        headers: {
+          'Authorization': authToken
+        }
+      })
+        .then(response => {
+          if (response.status === 401) {
+            showError('Authentication failed. Please check your token.');
+            return;
+          }
+          document.getElementById('newTask').value = '';
+          fetchTasks();
+        });
+    }
+  });
+
+  // Edit a task
+  function editTask(id, taskName) {
+    const newName = prompt('Edit task name:', taskName);
+    if (newName) {
+      fetch(`${apiUrl}/${id}/${newName}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': authToken
+        }
+      })
+        .then(response => {
+          if (response.status === 401) {
+            showError('Authentication failed. Please check your token.');
+            return;
+          }
+          fetchTasks();
+        });
+    }
+  }
+
+  // Remove a task
+  function removeTask(id) {
+    fetch(`${apiUrl}/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': authToken
+      }
+    })
+      .then(response => {
+        if (response.status === 401) {
+          showError('Authentication failed. Please check your token.');
+          return;
+        }
+        if (response.ok) {
+          fetchTasks(); // Refresh the task list dynamically
+        } else {
+          alert('Failed to delete the task.');
+        }
+      });
+  }
+
+  // Show error message
+  function showError(message) {
+    const errorDiv = document.getElementById('errorMessage');
+    errorDiv.textContent = message;
+    errorDiv.style.display = 'block';
+  }
+
+  // Initial fetch
+  fetchTasks();
+</script>
+{% include 'footer.html' %}
